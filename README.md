@@ -8,9 +8,13 @@
 
 <h4 align="center">SportSync - La meilleur app pour suivre vos sports préférés  .</h4>
 
+<br/>
+<br/>
 
 
 ![screenshot](https://github.com/Mouhamadou-Soumare/SportSyncFinal/blob/master/backend/public/assets/sportsyncdemo.png)
+<br/>
+<br/>
 
 
 
