@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination{
+  position: relative !important;
+  margin-top: 1rem;
+}
+
+.swiper-pagination-bullet-active{
+  background: rgb(21 128 61 / var(--tw-bg-opacity)) !important;
+}
+
+.authenticator-cards-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+}
+.authenticator-cards-container .column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  height: -moz-available;
+  height: 100%;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+.authenticator-cards-container .card {
+   width: 100%;
+    height: 30%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: rgba(0,0,0,.4) 0 2px 4px, rgba(0,0,0,.3) 0 7px 13px -3px, rgba(0,0,0,.2) 0 -3px 0 inset;
+    margin-bottom: 0;
+}
+.authenticator-cards-container .card img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}
+
+.flex-sportsync{
+  flex: 1 1 50%;
+}
+
+.pb-0{
+  padding-bottom: 0 !important;
+}
