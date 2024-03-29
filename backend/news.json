@@ -70,21 +70,5 @@
     "author": "Choeurtis Tchounga",
     "date": "2024-03-26",
     "image": "http://localhost:3000/assets/franceallemagne.jpg"
-  },
-  {
-    "id": 10,
-    "title": "Choerua",
-    "content": "dfezgf",
-    "author": "efez",
-    "date": "2024-03-29",
-    "image": "http://localhost:3000/assets/gettyimages-1393032559-612x612.jpg"
-  },
-  {
-    "id": 11,
-    "title": "vcff",
-    "content": "fvd",
-    "author": "dvfgdv",
-    "date": "2024-03-29",
-    "image": "http://localhost:3000/assets/gettyimages-1360149924-612x612.jpg"
   }
 ]
