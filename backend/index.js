@@ -18,6 +18,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 const router = express.Router();
 
+const resendKey= process.env.RESEND_KEy;
+console.log(resendKey);
 app.use('/footballapi', liveMatchesRouter);
 app.use('/auth', authRouter);
 app.use('/news', newsRouter.default); 
@@ -30,8 +32,7 @@ app.use((err, req, res, next) => {
 });
 
 const asyncHandler = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
-
-const resend = new Resend('re_c96X2TME_JchgPHgohxe2ZayAuHyGTsgY');
+const resend = new Resend(resendKey);
 app.post('/contact', async (req, res) => {
     try {
         const { from, to, subject, html } = req.body;

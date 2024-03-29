@@ -1,9 +1,11 @@
 import express, { response } from 'express';
 import axios from 'axios';
+import 'dotenv/config'
 
 const router = express.Router();
-const API_KEY = '6419a35e0amsh9ceaae77c044f25p1b6faajsn7ec061e70504';
 
+
+const API_KEY = process.env.FOOTBALL_API_KEY;
 let sortedTopScorersCache = {
   data: [],
   lastUpdatedTime: null
