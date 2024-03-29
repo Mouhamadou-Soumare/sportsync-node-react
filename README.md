@@ -60,3 +60,11 @@ L'application comprends les différentes pages suivantes:
 ## API
 
 Cette application utilise l'API Football pour obtenir les matchs en direct et les classements. L'API Football est une API de données sportives fournissant des informations sur les matchs, les équipes, les compétitions et bien plus encore. Pour plus d'informations sur l'API Football, veuillez consulter leur documentation officielle : [https://www.api-football.com/](https://www.api-football.com/).
+
+
+## Configuration des variables d'environnement (.env)
+
+Pour configurer correctement l'application, vous devez créer un fichier `.env` à la racine du backend. Ce fichier contiendra les variables d'environnement nécessaires pour l'exécution de l'application. Un exemple de .env existe dans le dossier backend.
+
+
+Assurez-vous de ne jamais partager ce fichier `.env` publiquement, car il contient des informations sensibles telles que les clés d'API et les URL de base.
