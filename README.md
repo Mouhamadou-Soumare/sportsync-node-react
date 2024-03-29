@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://github.com/Mouhamadou-Soumare/SportSyncFinal/blob/master/backend/public/assets/sportSyncLogo2.png" alt="SportSync" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://github.com/Mouhamadou-Soumare/SportSyncFinal/blob/master/backend/public/assets/sportSyncLogo2.png" alt="SportSync" width="100"></a>
   <br>
   SportSync
   <br>
