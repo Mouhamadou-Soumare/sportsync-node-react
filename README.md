@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Markdownify" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://github.com/Mouhamadou-Soumare/SportSyncFinal/blob/master/backend/public/assets/sportSyncLogo2.png" alt="SportSync" width="200"></a>
   <br>
   SportSync
   <br>
@@ -10,7 +10,7 @@
 
 
 
-![screenshot](https://github.com/Mouhamadou-Soumare/sportsync/blob/f33f715f5a14f7a8cf77f840b561aeb01a211744/src/assets/sportsync.web)
+![screenshot](https://github.com/Mouhamadou-Soumare/SportSyncFinal/blob/master/backend/public/assets/sportsyncdemo.png)
 
 
 
