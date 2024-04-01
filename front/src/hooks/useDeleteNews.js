@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 function useDeleteNews() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const deleteNews = async (id) => {
+    console.log(id);
     setLoading(true);
     setError(null);
     try {

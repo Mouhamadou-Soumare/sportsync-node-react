@@ -1,132 +1,95 @@
-import { readFileSync, writeFileSync } from 'fs';
 import express from 'express';
 import multer from 'multer';
-
-
+import News from '../model/newsModel.js';
+import { put } from '@vercel/blob';
 
 const router = express.Router();
+const upload = multer();
 
-
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-      return cb(null, "./public/assets")
-    },
-    filename: function (req, file, cb) {
-      return cb(null, `${file.originalname}`)
-    }
-  })
-
-  const upload = multer({storage})
-
-
-router.get('/list-all', (req, res) => {
-    try {
-        const newsData = getNewsData();
-        res.json(newsData);
-    } catch (error) {
-        console.error('Error retrieving news:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+router.get('/list-all', async (req, res) => {
+  try {
+    const newsData = await News.find();
+    const formattedNewsData = newsData.map(news => ({
+      ...news._doc,
+      date: news.date.toISOString().split('T')[0], 
+    }));
+    res.json(formattedNewsData);
+  } catch (error) {
+    console.error('Error retrieving news:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    try {
-        const newsData = getNewsData();
-        const news = newsData.find(news => news.id.toString() === id.toString());
-
-        if (!news) {
-            return res.status(404).json({ message: 'News not found' });
-        }
-        res.json(news);
-    } catch (error) {
-        console.error('Error retrieving news by ID:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const news = await News.findById(id);
+    if (!news) {
+      return res.status(404).json({ message: 'News not found' });
     }
+    const formattedNews = {
+      ...news._doc,
+      date: news.date.toISOString().split('T')[0], // Formatage de la date
+    };
+    res.json(formattedNews);
+  } catch (error) {
+    console.error('Error retrieving news by ID:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-router.post('/add-news',  upload.single('file'), (req, res) => { 
-    try {
-        const currentDate = new Date().toISOString().slice(0, 10);
+router.post('/add-news', upload.single('file'), async (req, res) => {
+  try {
+    const currentDate = new Date().toISOString().slice(0, 10);
 
-        const newsData = getNewsData();
+    // Upload de l'image vers Vercel Blob
+    const { url } = await put(`images/${req.file.originalname}`, req.file.buffer, {
+      access: 'public'
+    });
 
-        const lastId = newsData.length > 0 ? newsData[newsData.length - 1].id : 0;
+    const newNews = new News({
+      title: req.body.title,
+      content: req.body.content,
+      author: req.body.author,
+      date: currentDate,
+      image: url, // Utilisation de l'URL de l'image dans Vercel Blob
+    });
 
-        console.log(req);
+    await newNews.save();
 
-        const newNews = {
-            id: lastId + 1,
-            title: req.body.title,
-            content: req.body.content,
-            author: req.body.author,
-            date: currentDate,
-            image: req.file ? "http://localhost:3000/assets/" + req.file.filename : ''
-
-        };
-
-        newsData.push(newNews);
-
-        writeNewsData(newsData);
-
-        res.status(201).json({ message: 'News added successfully', id: newNews.id });
-    } catch (error) {
-        console.error('Error adding news:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(201).json({ message: 'News added successfully', id: newNews._id });
+  } catch (error) {
+    console.error('Error adding news:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-function getNewsData() {
-    const rawData = readFileSync('../backend/news.json', 'utf-8');
-    return JSON.parse(rawData);
-}
-
-function writeNewsData(newsData) {
-    writeFileSync('../backend/news.json', JSON.stringify(newsData, null, 2));
-}
-
-router.delete('/delete/:id', (req, res) => {
-    const id = req.params.id;
-    try {
-        let newsData = getNewsData();
-        
-        const index = newsData.findIndex(news => news.id.toString() === id.toString());
-        if (index === -1) {
-            return res.status(404).json({ message: 'News not found' });
-        }
-
-        newsData.splice(index, 1);
-
-        newsData = newsData.map((news, index) => {
-            news.id = index + 1;
-            return news;
-        });
-
-        writeNewsData(newsData);
-
-        res.status(200).json({ message: 'News deleted successfully' });
-    } catch (error) {
-        console.error('Error deleting news:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedNews = await News.findByIdAndDelete(id);
+    if (!deletedNews) {
+      return res.status(404).json({ message: 'News not found' });
     }
+    res.status(200).json({ message: 'News deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting news:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-router.put('/update/:id', (req, res) => {
-    const id = req.params.id;
-    try {
-        const newsData = getNewsData();
-        const index = newsData.findIndex(news => news.id.toString() === id.toString());
-        if (index === -1) {
-            return res.status(404).json({ message: 'News not found' });
-        }
-        const updatedNews = { ...newsData[index], ...req.body };
-        newsData[index] = updatedNews;
-        writeNewsData(newsData);
-        res.status(200).json({ message: 'News updated successfully', news: updatedNews });
-    } catch (error) {
-        console.error('Error updating news:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+router.put('/update/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const updatedNews = await News.findByIdAndUpdate(id, req.body, { new: true });
+    if (!updatedNews) {
+      return res.status(404).json({ message: 'News not found' });
     }
+    res.status(200).json({ message: 'News updated successfully', news: updatedNews });
+  } catch (error) {
+    console.error('Error updating news:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 export default router;

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useGetStandings = (initialLeagueId) => {
   const [leagueId, setLeagueId] = useState(initialLeagueId);
@@ -10,8 +10,10 @@ const useGetStandings = (initialLeagueId) => {
     const fetchStandings = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/footballapi/standings/${leagueId}`);
-        console.log(response.data.response); 
+        const response = await axios.get(
+          `http://localhost:3000/footballapi/standings/${leagueId}`
+        );
+        console.log(response.data.response);
         setStandings(response.data.response);
         setLoading(false);
       } catch (error) {
@@ -22,15 +24,13 @@ const useGetStandings = (initialLeagueId) => {
 
     fetchStandings();
 
-    return () => {
-    };
+    return () => {};
   }, [leagueId]);
 
   const handleLeagueChange = (newLeagueId) => {
     setLeagueId(newLeagueId);
   };
 
-  
   return { standings, loading, error, handleLeagueChange };
 };
 

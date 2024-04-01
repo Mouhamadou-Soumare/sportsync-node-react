@@ -50,7 +50,6 @@ code {
   gap: 1rem;
   width: -moz-available;
   width: -webkit-fill-available;
-  width: fill-available;
 }
 .authenticator-cards-container .column {
   flex: 1;
@@ -62,7 +61,6 @@ code {
   height: -moz-available;
   height: 100%;
   height: -webkit-fill-available;
-  height: fill-available;
 }
 .authenticator-cards-container .card {
    width: 100%;
@@ -89,4 +87,8 @@ code {
 
 .pb-0{
   padding-bottom: 0 !important;
+}
+
+.ql-align-center{
+  text-align: center;
 }

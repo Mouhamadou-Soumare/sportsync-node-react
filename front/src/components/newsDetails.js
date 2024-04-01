@@ -1,9 +1,10 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'; 
+import React from "react";
+import { useParams } from "react-router-dom";
 import useGetNewsById from "../hooks/useGetNewsById";
+import "react-quill/dist/quill.snow.css"; // Importez le style par défaut de ReactQuill
 
 function NewsDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const { news, loading, error } = useGetNewsById(id);
 
   if (loading) {
@@ -18,11 +19,20 @@ function NewsDetails() {
     return <div>News not found</div>;
   }
 
+  // Fonction pour convertir le contenu HTML en texte brut
+  const decodeHTML = (html) => {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  };
+
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{news.title}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            {news.title}
+          </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">{news.date}</p>
         </div>
         <div className="mx-auto mt-16">
@@ -33,7 +43,7 @@ function NewsDetails() {
           />
         </div>
         <div className="mx-auto mt-12 max-w-2xl text-left text-gray-700">
-          <p>{news.content}</p>
+          <p dangerouslySetInnerHTML={{ __html: decodeHTML(news.content) }}></p>
           <p className="mt-6">Auteur: {news.author}</p>
         </div>
       </div>

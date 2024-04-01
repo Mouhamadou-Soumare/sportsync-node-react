@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import useGetAllNews from '../hooks/useGetAllNews';
-import useDeleteNews from '../hooks/useDeleteNews';
+import useGetAllNews from "../hooks/useGetAllNews";
+import useDeleteNews from "../hooks/useDeleteNews";
 
 function NewsDashboard() {
   const { news, loading, error, refetch } = useGetAllNews();
-  const { deleteNews, loading: deleteLoading, error: deleteError } = useDeleteNews();
+  const {
+    deleteNews,
+    loading: deleteLoading,
+    error: deleteError,
+  } = useDeleteNews();
 
   const handleDelete = async (id) => {
     await deleteNews(id);
     refetch();
+    console.log(id);
   };
-
- 
 
   if (loading || deleteLoading) {
     return <div>Loading...</div>;
@@ -27,14 +30,19 @@ function NewsDashboard() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-base font-semibold leading-6 text-gray-900">Actualités</h1>
+            <h1 className="text-base font-semibold leading-6 text-gray-900">
+              Actualités
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
-              Liste de toutes les actualités avec la possibilité de les modifier ou de les supprimer.
+              Liste de toutes les actualités avec la possibilité de les modifier
+              ou de les supprimer.
             </p>
           </div>
-          <Link to={`/add-news`}
-            className="text-white mr-3 bg-green-700 hover:bg-green-900 p-3 rounded-lg font-bold">
-              Ajouter une Actu
+          <Link
+            to={`/add-news`}
+            className="text-white mr-3 bg-green-700 hover:bg-green-900 p-3 rounded-lg font-bold"
+          >
+            Ajouter une Actu
           </Link>
         </div>
         <div className="mt-8 flow-root">
@@ -70,10 +78,15 @@ function NewsDashboard() {
                         {item.date}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <Link to={`/modif-actus/${item.id}`}>Modifier</Link>
+                        <Link to={`/modif-actus/${item._id}`}>Modifier</Link>
 
                         <span className="mx-2">|</span>
-                        <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900">Supprimer</button>
+                        <button
+                          onClick={() => handleDelete(item._id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Supprimer
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -81,7 +94,6 @@ function NewsDashboard() {
               </table>
             </div>
           </div>
-
         </div>
       </div>
     </div>

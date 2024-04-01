@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function ContactForm() {
   const history = useHistory();
   const [formData, setFormData] = useState({
-    from: '',
-    to: 'choeurtis.tchounga@eemi.com',
-    subject: '',
-    html: ''
+    from: "",
+    to: "choeurtis.tchounga@eemi.com",
+    subject: "",
+    html: "",
   });
 
   const handleInputChange = (e) => {
@@ -17,13 +17,14 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3000/contact`, formData)
-      .then(response => {
-        console.log('Contact send:', response.data);
+    axios
+      .post(`http://localhost:3000/contact`, formData)
+      .then((response) => {
+        console.log("Contact send:", response.data);
         history.push(`/`);
       })
-      .catch(error => {
-        console.error('Error contact:', error);
+      .catch((error) => {
+        console.error("Error contact:", error);
       });
   };
 
@@ -33,17 +34,26 @@ function ContactForm() {
         <div className="space-y-10 divide-y divide-gray-900/10">
           <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
             <div className="px-4 sm:px-0">
-              <h2 className="text-base font-semibold leading-7 text-gray-900">Nous contacter</h2>
+              <h2 className="text-base font-semibold leading-7 text-gray-900">
+                Nous contacter
+              </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                vous voulez nous contacter ?
+                Pour toutes demande d'informations ou renseignements, veuillez
+                remplir le formulaire
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
+            >
               <div className="px-4 py-6 sm:p-8">
                 <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-4">
-                    <label htmlFor="from" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label
+                      htmlFor="from"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
                       E-mail
                     </label>
                     <input
@@ -57,8 +67,11 @@ function ContactForm() {
                   </div>
 
                   <div className="col-span-full">
-                    <label htmlFor="subject" className="block text-sm font-medium leading-6 text-gray-900">
-                    Sujet
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Sujet
                     </label>
                     <input
                       type="subject"
@@ -68,12 +81,15 @@ function ContactForm() {
                       onChange={handleInputChange}
                       className="block w-full border-2 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       required
-                   />
+                    />
                   </div>
 
                   <div className="col-span-full">
-                    <label htmlFor="html" className="block text-sm font-medium leading-6 text-gray-900">
-                    Message
+                    <label
+                      htmlFor="html"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Message
                     </label>
                     <textarea
                       id="html"

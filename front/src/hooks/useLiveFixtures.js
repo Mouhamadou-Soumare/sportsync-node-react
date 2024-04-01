@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useLiveFixtures = () => {
   const [fixtures, setFixtures] = useState([]);
@@ -10,7 +10,9 @@ const useLiveFixtures = () => {
     const fetchFixtures = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:3000/footballapi/direct');
+        const response = await axios.get(
+          "http://localhost:3000/footballapi/direct"
+        );
         setFixtures(response.data);
         setLoading(false);
       } catch (error) {
@@ -21,10 +23,8 @@ const useLiveFixtures = () => {
 
     fetchFixtures();
 
-    return () => {
-    };
+    return () => {};
   }, []);
-  console.log(fixtures);
   return { fixtures, loading, error };
 };
 

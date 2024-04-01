@@ -1,5 +1,5 @@
-import React from 'react';
-import NewsList from '../components/newsList';
+import React from "react";
+import NewsList from "../components/newsList";
 
 function NewsPage() {
   return (
