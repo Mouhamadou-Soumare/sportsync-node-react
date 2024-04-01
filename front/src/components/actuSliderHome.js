@@ -10,6 +10,7 @@ import useGetAllNews from "../hooks/useGetAllNews";
 export default function ActuSliderHomepage() {
   const { news, loading, error } = useGetAllNews();
 
+
   let latestNews = [];
 
   if (!loading && !error) {
