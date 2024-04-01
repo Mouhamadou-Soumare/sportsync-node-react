@@ -5,6 +5,7 @@ function useGetAllNews() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000"; // Utilisation de la variable d'environnement
 
   const fetchNews = async () => {
     try {
