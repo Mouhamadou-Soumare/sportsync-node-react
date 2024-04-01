@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import {
     Resend
 } from 'resend';
@@ -11,18 +10,21 @@ import db from './db.js';
 import {
     fileURLToPath
 } from 'url';
+import allowCors from './cors.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 const router = express.Router();
 
 const resendKey = process.env.RESEND_KEY;
+app.use(allowCors);
+
 app.use('/footballapi', liveMatchesRouter);
 app.use('/auth', authRouter);
 app.use('/news', newsRouter.default);
