@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // Récupérer la clé de connexion à la base de données depuis les variables d'environnement
-const db_key = process.env.DB_key;
+const db_key = process.env.DB_KEY;
 
 // Vérifier si la clé de connexion est définie
 if (!db_key) {
