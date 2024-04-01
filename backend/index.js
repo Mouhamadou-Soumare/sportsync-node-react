@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 const router = express.Router();
 
-const resendKey = process.env.RESEND_KEy;
+const resendKey = process.env.RESEND_KEY;
 app.use('/footballapi', liveMatchesRouter);
 app.use('/auth', authRouter);
 app.use('/news', newsRouter.default);
