@@ -43,7 +43,7 @@ const router = express.Router();
 
 
 
-const resendKey = process.env.RESEND_KEy;
+const resendKey = process.env.RESEND_KEY;
 
 
 app.use('/footballapi', liveMatchesRouter);
