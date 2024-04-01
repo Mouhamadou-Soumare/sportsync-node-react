@@ -14,10 +14,12 @@ function UpdateNewsForm() {
     author: "",
     date: "",
   });
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000"; // Utilisation de la variable d'environnement
+
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/news/${id}`)
+      .get(`${baseUrl}/news/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -33,7 +35,7 @@ function UpdateNewsForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/news/update/${id}`, formData)
+      .put(`${baseUrl}/news/update/${id}`, formData)
       .then((response) => {
         console.log("News updated successfully:", response.data);
         history.push(`/news/${id}`);

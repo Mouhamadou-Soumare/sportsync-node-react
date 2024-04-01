@@ -8,11 +8,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000";
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post("${baseUrl}/auth/login", {
         username,
         password,
       });

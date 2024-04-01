@@ -11,6 +11,8 @@ function ContactForm() {
     html: "",
   });
 
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000"; // Utilisation de la variable d'environnement
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,7 +20,7 @@ function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3000/contact`, formData)
+      .post(`${baseUrl}/contact`, formData)
       .then((response) => {
         console.log("Contact send:", response.data);
         history.push(`/`);

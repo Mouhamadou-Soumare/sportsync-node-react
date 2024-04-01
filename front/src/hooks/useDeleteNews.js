@@ -10,7 +10,7 @@ function useDeleteNews() {
     setLoading(true);
     setError(null);
     try {
-      await axios.delete(`http://localhost:3000/news/delete/${id}`);
+      await axios.delete(`${baseUrl}/news/delete/${id}`);
       setLoading(false);
     } catch (error) {
       setError(error);

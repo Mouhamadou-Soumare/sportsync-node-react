@@ -8,7 +8,7 @@ function useGetAllNews() {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/news/list-all");
+      const response = await axios.get(`${baseUrl}/news/list-all`);
       setNews(response.data);
       setLoading(false);
     } catch (error) {

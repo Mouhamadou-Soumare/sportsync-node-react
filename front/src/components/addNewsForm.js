@@ -24,6 +24,9 @@ function AddNewsForm() {
     setFile(file);
   };
 
+  const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000"; // Utilisation de la variable d'environnement
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formDataWithImage = new FormData();
@@ -32,7 +35,7 @@ function AddNewsForm() {
     formDataWithImage.append("content", formData.content);
     formDataWithImage.append("author", formData.author);
     axios
-      .post(`http://localhost:3000/news/add-news`, formDataWithImage)
+      .post(`${baseUrl}/news/add-news`, formDataWithImage)
       .then((response) => {
         console.log("News updated successfully:", response.data);
         history.push(`/allnews`);

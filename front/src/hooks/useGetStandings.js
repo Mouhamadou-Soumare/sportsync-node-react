@@ -11,7 +11,7 @@ const useGetStandings = (initialLeagueId) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:3000/footballapi/standings/${leagueId}`
+          `${baseUrl}/footballapi/standings/${leagueId}`
         );
         console.log(response.data.response);
         setStandings(response.data.response);
