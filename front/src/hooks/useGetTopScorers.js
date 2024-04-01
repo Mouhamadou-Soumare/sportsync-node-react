@@ -19,7 +19,7 @@ const useGetTopScorers = () => {
         setError(error);
         setLoading(false);
       }
-    };
+    }; 
 
     fetchTopScorers();
 
