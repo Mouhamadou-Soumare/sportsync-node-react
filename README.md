@@ -63,8 +63,9 @@ L'application comprends les différentes pages suivantes:
 
 ## API
 
-Cette application utilise l'API Football pour obtenir les matchs en direct et les classements. L'API Football est une API de données sportives fournissant des informations sur les matchs, les équipes, les compétitions et bien plus encore. Pour plus d'informations sur l'API Football, veuillez consulter leur documentation officielle : [https://www.api-football.com/](https://www.api-football.com/).
+Cette application utilise l'API Football pour obtenir les matchs en direct et les classements. L'API Football est une API de données sportives fournissant des informations sur les matchs, les équipes, les compétitions et bien plus encore. Pour plus d'informations sur l'API Football, veuillez consulter leur documentation officielle : https://www.api-football.com/.
 
+Si des erreurs 500 (Error: Request failed with status code 500) apparaissent, cela signifie généralement que le nombre de requêtes quotidiennes autorisées sur l'API Football a été atteint.
 
 ## Configuration des variables d'environnement (.env)
 
