@@ -10,7 +10,6 @@ router.get('/list-all', async (req, res) => {
   try {
 
     const newsData = await News.find();
-    console.log(newsData);
     const formattedNewsData = newsData.map(news => ({
       ...news._doc,
       date: news.date.toISOString().split('T')[0], 

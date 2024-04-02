@@ -69,8 +69,6 @@ function AllTopScorers() {
               return (
                 <tr key={player.id}>
                   <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                    {console.log(player.photo)}{" "}
-                    {/* Ajouter cette ligne pour afficher la valeur de player.photo */}
                     <img
                       src={player.photo}
                       alt={player.name}

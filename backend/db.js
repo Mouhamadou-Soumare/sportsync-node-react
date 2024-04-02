@@ -20,7 +20,6 @@ const db = mongoose.connection;
 // Écoute l'événement de connexion réussie
 db.once('open', () => {
   console.log('Connected to MongoDB');
-  console.log(db);
 });
 
 // Écoute l'événement d'erreur de connexion

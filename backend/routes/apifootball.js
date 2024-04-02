@@ -48,7 +48,7 @@ const cacheMiddlewareStandings = async (req, res, next) => {
 };
 
 async function getFixtures() {
-  const competitions = [30, 61];
+  const competitions = [2,3,39,61,78,135,140];
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() ); 
   const formattedDate = currentDate.toISOString().split('T')[0];
