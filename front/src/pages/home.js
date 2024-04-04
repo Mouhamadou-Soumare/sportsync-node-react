@@ -79,7 +79,7 @@ export default function Homepage() {
                     <div className="relative">
                       <img
                         src={latestNewsImage}
-                        alt=" 1"
+                        alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -89,7 +89,7 @@ export default function Homepage() {
                     <div className="relative">
                       <img
                         src={sndlastestNewsImage}
-                        alt=" 2"
+                        alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -97,7 +97,7 @@ export default function Homepage() {
                     <div className="relative">
                       <img
                         src={thlastestNewsImage}
-                        alt=" 3"
+                        alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -107,7 +107,7 @@ export default function Homepage() {
                     <div className="relative">
                       <img
                         src={fhtlastestNewsImage}
-                        alt="  4"
+                        alt=""
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -116,7 +116,7 @@ export default function Homepage() {
                       <img
                         src={lastlatestNewsImage}
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                        alt=" 5"
+                        alt=""
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
                     </div>
