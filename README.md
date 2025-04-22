@@ -49,7 +49,7 @@ L'application comprends les différentes pages suivantes:
 - /: Page d'accueil affichant les dernières actualités.
 - /allnews: Page affichant toutes les actualités disponibles.
 - /news/:id: Page affichant les détails d'une actualité spécifique.
-- /adminlogin: Page de connexion pour les administrateurs. Utilisez les identifiants admin et password
+- /adminlogin: Page de connexion pour les administrateurs. Utilisez les identifiants "admin" et "password"
 - /gestion-actus: Page de tableau de bord pour la gestion des actualités.
 - /modif-actus/:id: Page de formulaire pour modifier une actualité spécifique.
 - /classements : Page affichant le classements des championnats européens 
