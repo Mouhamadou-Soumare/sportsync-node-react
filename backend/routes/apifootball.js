@@ -16,6 +16,18 @@ let standingsCache = {
   lastUpdatedTime: null
 };
 
+// Fonction pour obtenir la saison actuelle en fonction du mois
+function getCurrentSeason() {
+  const currentMonth = new Date().getMonth(); // Mois actuel (0-11)
+  const currentYear = new Date().getFullYear(); // Année actuelle
+
+  // Si le mois est entre janvier (0) et juillet (6), la saison est l'année précédente
+  if (currentMonth < 7) {
+    return `${currentYear - 1}`;  // Saison précédente, ex : 2023
+  } else {
+    return `${currentYear}`;  // Saison en cours, ex : 2024
+  }
+}
 
 
 const cacheMiddlewareTopScorers = async (req, res, next) => {
@@ -53,6 +65,7 @@ async function getFixtures() {
   currentDate.setDate(currentDate.getDate() ); 
   const formattedDate = currentDate.toISOString().split('T')[0];
   const allFixtures = []; 
+  const currentSeason = getCurrentSeason(); 
 
   try {
       for (const competitionId of competitions) {
@@ -64,7 +77,7 @@ async function getFixtures() {
               params: {
                   league: competitionId,
                   date: formattedDate,
-                  season: '2023',
+                  season:  currentSeason,
               }
           });
 
@@ -93,6 +106,7 @@ router.get('/topscorers', cacheMiddlewareTopScorers, async (req, res) => {
    const competitions = [1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 15, 39, 45, 61, 65, 66, 78, 81, 135, 137, 140, 143]; // Identifiants des compétitions spécifiées
   // const competitions = [39]; 
   const topScorersList = [];
+  const currentSeason = getCurrentSeason();
 
   try {
     for (const competition of competitions) {
@@ -101,7 +115,7 @@ router.get('/topscorers', cacheMiddlewareTopScorers, async (req, res) => {
         url: 'https://api-football-v1.p.rapidapi.com/v3/players/topscorers',
         params: {
           league: competition,
-          season: '2023' 
+          season: currentSeason
         },
         headers: {
           'X-RapidAPI-Key': API_KEY,
@@ -164,11 +178,12 @@ router.get('/topscorers', cacheMiddlewareTopScorers, async (req, res) => {
 
 router.get('/standings/:leagueId', cacheMiddlewareStandings, async (req, res) => {
   const { leagueId } = req.params;
+  const currentSeason = getCurrentSeason();
   const options = {
     method: 'GET',
     url: 'https://api-football-v1.p.rapidapi.com/v3/standings',
     params: {
-      season: '2023',
+      season: currentSeason,
       league: leagueId
     },
     headers: {
