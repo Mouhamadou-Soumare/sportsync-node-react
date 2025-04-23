@@ -81,9 +81,19 @@ export default function Navbar() {
                   </a>
                 </Menu.Item>
                 <Menu.Item>
-                  <a href="/" className="bg-gray-100 p-3">
-                    Se Déconnecter
-                  </a>
+                  {({ active }) => (
+                    <button
+                      onClick={() => {
+                        Cookies.remove("auth_token");
+                        window.location.href = "/";
+                      }}
+                      className={`${
+                        active ? "bg-gray-100" : ""
+                      } w-full text-left p-3 text-sm font-semibold text-gray-900`}
+                    >
+                      Se Déconnecter
+                    </button>
+                  )}
                 </Menu.Item>
               </Menu.Items>
             </Transition>
