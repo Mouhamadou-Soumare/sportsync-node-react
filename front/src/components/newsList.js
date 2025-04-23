@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useGetAllNews from "../hooks/useGetAllNews";
+import Loader from "../components/Loader";
 
 export default function NewsList() {
   const { news, loading, error } = useGetAllNews();
@@ -9,8 +10,22 @@ export default function NewsList() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
-  if (loading) {
-    return <div>Loading...</div>;
+  const [showLoader, setShowLoader] = useState(true); 
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 2000);
+
+    return () => clearTimeout(timer); 
+  }, [loading]); 
+
+  if (showLoader) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
