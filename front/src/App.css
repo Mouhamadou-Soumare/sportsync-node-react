@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+
+.main-fader {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader svg {
+  height: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.loader path {
+  animation-duration: 1s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  color: #26a380;
+}
+
+.loader .path-7 {
+  animation-delay: -1s;
+}
+
+.loader .path-6 {
+  animation-delay: -0.875s;
+}
+
+.loader .path-5 {
+  animation-delay: -0.75s;
+}
+
+.loader .path-4 {
+  animation-delay: -0.625s;
+}
+
+.loader .path-3 {
+  animation-delay: -0.5s;
+}
+
+.loader .path-2 {
+  animation-delay: -0.375s;
+}
+
+.loader .path-1 {
+  animation-delay: -0.25s;
+}
+
+.loader .path-0 {
+  animation-delay: -0.125s;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}

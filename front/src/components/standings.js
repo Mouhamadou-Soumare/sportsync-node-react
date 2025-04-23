@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useGetStandings from "../hooks/useGetStandings";
+import pedriTired from "../assets/pedri_tired.jpg";
+import Loader from "../components/Loader";
 
 function Standings() {
   const [selectedLeague, setSelectedLeague] = useState("39");
@@ -8,6 +10,7 @@ function Standings() {
   const [leagueName, setLeagueName] = useState("");
   const [leagueLogo, setLeagueLogo] = useState("");
   const [classement, setClassement] = useState([]);
+  const [showLoader, setShowLoader] = useState(true); // Affichage du loader avec délai
 
   useEffect(() => {
     if (!loading && standings.length > 0) {
@@ -17,16 +20,49 @@ function Standings() {
     }
   }, [loading, standings]);
 
+  // Gérer le changement de ligue
   const handleLeagueChange = (event) => {
     setSelectedLeague(event.target.value);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  // Logique pour afficher le loader pendant 2 secondes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false); // Masquer le loader après 2 secondes
+    }, 2000); // 2 secondes minimum
+
+    return () => clearTimeout(timer); // Nettoyage du timer
+  }, [loading]);
+
+  // Affichage du loader s'il est encore actif
+  if (showLoader) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
+  // Affichage en cas d'erreur
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+        <img
+          src={pedriTired}
+          alt="Erreur API"
+          className="w-32 h-32 mb-6 rounded-full"
+        />
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Oups !</h2>
+        <p className="text-gray-600 mb-2">
+          Une erreur est survenue lors du chargement des classements.
+        </p>
+        <p className="text-gray-500">
+          Cela est probablement dû à une surconsommation de mes crédits sur l’API de football.
+          <br />
+          Merci de réessayer un peu plus tard
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -48,7 +84,7 @@ function Standings() {
             <option value="39">Premier League</option>
             <option value="61">Ligue 1</option>
           </select>
-          <img src={leagueLogo} className="w-20" />
+          <img src={leagueLogo} className="w-20" alt={leagueName} />
         </div>
         <table className="w-full border-collapse border border-gray-200">
           <thead className="bg-gray-50 border-b border-gray-200">
@@ -94,7 +130,7 @@ function Standings() {
                     {teamData.rank}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex flex-row items-center gap-2">
-                    <img src={teamData.team.logo} className="w-6"></img>
+                    <img src={teamData.team.logo} className="w-6" alt={teamData.team.name} />
                     {teamData.team.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

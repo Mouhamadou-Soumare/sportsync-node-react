@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/sportSyncLogoBlack1.png";
@@ -6,16 +6,37 @@ import Cookies from "js-cookie";
 import { Menu, Transition } from "@headlessui/react";
 
 const navigation = [
-  { name: "Match en direct", href: "allfixtures" },
-  { name: "Classements", href: "classements" },
-  { name: "Meilleurs buteurs", href: "alltopscorers" },
+  { name: "Match en direct", href: "/allfixtures" },
+  { name: "Classements", href: "/classements" },
+  { name: "Meilleurs buteurs", href: "/alltopscorers" },
   { name: "Actualités", href: "/allnews" },
   { name: "Nous contacter", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isAuthenticated = !!Cookies.get("auth_token");
+  const [isAuthenticated, setIsAuthenticated] = useState(!!Cookies.get("auth_token")); 
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      const token = Cookies.get("auth_token");
+      setIsAuthenticated(!!token);
+    };
+
+    handleAuthChange(); 
+
+    window.addEventListener("storage", handleAuthChange);
+
+    return () => {
+      window.removeEventListener("storage", handleAuthChange);
+    };
+  }, []); 
+
+  const handleLogout = () => {
+    Cookies.remove("auth_token");
+    setIsAuthenticated(false); 
+    window.location.href = "/";
+  };
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -83,10 +104,7 @@ export default function Navbar() {
                 <Menu.Item>
                   {({ active }) => (
                     <button
-                      onClick={() => {
-                        Cookies.remove("auth_token");
-                        window.location.href = "/";
-                      }}
+                      onClick={handleLogout}
                       className={`${
                         active ? "bg-gray-100" : ""
                       } w-full text-left p-3 text-sm font-semibold text-gray-900`}

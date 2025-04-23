@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useGetTopScorers from "../hooks/useGetTopScorers";
+import pedriTired from "../assets/pedri_tired.jpg";
+import Loader from "../components/Loader";
 
 function AllTopScorers() {
   const { topScorers, loading, error } = useGetTopScorers();
   const [sortByGoals, setSortByGoals] = useState("desc");
+  const [showLoader, setShowLoader] = useState(true); 
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [loading]); 
+
   const handleSortChange = () => {
     setSortByGoals(sortByGoals === "desc" ? "asc" : "desc");
   };
@@ -18,17 +30,39 @@ function AllTopScorers() {
 
   console.log(sortedTopScorers);
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (showLoader) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+        <img
+          src={pedriTired}
+          alt="Erreur API"
+          className="w-32 h-32 mb-6 rounded-full"
+        />
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Oups !</h2>
+        <p className="text-gray-600 mb-2">
+          Une erreur est survenue lors du chargement des meilleurs buteurs.
+        </p>
+        <p className="text-gray-500">
+          Cela est probablement dû à une surconsommation de mes crédits sur l’API de football.
+          <br />
+          Merci de réessayer un peu plus tard.
+        </p>
+      </div>
+    );
   }
 
+  // Affichage des meilleurs buteurs lorsque les données sont chargées
   return (
     <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
-      <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0  lg:max-w-none lg:items-center">
+      <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:max-w-none lg:items-center">
         <h2 className="text-6xl text-center font-semibold leading-6 text-gray-900 mt-24 mb-14">
           Meilleurs buteurs
         </h2>
