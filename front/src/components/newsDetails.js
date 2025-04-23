@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useGetNewsById from "../hooks/useGetNewsById";
-import "react-quill/dist/quill.snow.css"; // Importez le style par défaut de ReactQuill
+import "react-quill/dist/quill.snow.css";
 
 function NewsDetails() {
   const { id } = useParams();
