@@ -166,7 +166,7 @@ function Login() {
             </div>
             <div class="card">
               <img
-                src="https://i.ibb.co/gjZgBpB/gettyimages-1609665296-612x612.jpg"
+                src="https://i.ibb.co/8DtSthD7/Ousmane-Dembe-le-Getty-Images.jpg"
                 alt=""
               />
             </div>
