@@ -19,7 +19,7 @@ function AllFixtures() {
   if (showLoader) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader />
+        <Loader /> 
       </div>
     );
   }
