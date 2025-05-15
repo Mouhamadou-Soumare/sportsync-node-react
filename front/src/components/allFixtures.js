@@ -26,7 +26,7 @@ function AllFixtures() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 flex">
         <img
           src={pedriTired}
           alt="Erreur API"
